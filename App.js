@@ -1,5 +1,3 @@
-// server.js
-
 const express = require('express');
 const cors = require('cors');
 const sqlite3 = require('sqlite3').verbose();
@@ -16,9 +14,22 @@ app.use(cors());
 // SQLite database initialization
 const db = new sqlite3.Database('database.db'); // In-memory database for simplicity
 
-// Create users table
-db.serialize(() => {
-  db.run("CREATE TABLE users (id INTEGER PRIMARY KEY, email TEXT UNIQUE, password TEXT, phone TEXT)");
+// Check if the users table exists before trying to create it
+db.get("SELECT name FROM sqlite_master WHERE type='table' AND name='users'", (err, row) => {
+  if (err) {
+    console.error(err.message);
+    return;
+  }
+  if (!row) {
+    // Create users table if it doesn't exist
+    db.run("CREATE TABLE users (id INTEGER PRIMARY KEY, email TEXT UNIQUE, password TEXT, phone TEXT)", (err) => {
+      if (err) {
+        console.error('Error creating users table:', err.message);
+      } else {
+        console.log('Users table created successfully.');
+      }
+    });
+  }
 });
 
 // Register route
@@ -60,13 +71,13 @@ app.post('/login', async (req, res) => {
     // Find user by email
     db.get("SELECT * FROM users WHERE email = ?", [email], async (err, user) => {
       if (err || !user) {
-        return res.status(401).json({ message: 'user not exist.' });
+        return res.status(401).json({ message: 'User does not exist.' });
       }
 
       // Check password
       const isPasswordValid = await bcrypt.compare(password, user.password);
       if (!isPasswordValid) {
-        return res.status(401).json({ message: 'Invalid  password.' });
+        return res.status(401).json({ message: 'Invalid password.' });
       }
 
       // Generate JWT token
