@@ -1,0 +1,190 @@
+[
+    {
+      "title": "Spaghetti Carbonara",
+      "image": "https://www.example.com/spaghetti_carbonara.jpg",
+      "ingredients": [
+        "spaghetti",
+        "eggs",
+        "bacon",
+        "Parmesan cheese",
+        "black pepper"
+      ],
+      "sourceUrl": "https://www.example.com/spaghetti_carbonara_recipe"
+    },
+    {
+      "title": "Chicken Alfredo",
+      "image": "https://www.example.com/chicken_alfredo.jpg",
+      "ingredients": [
+        "fettuccine",
+        "chicken breasts",
+        "heavy cream",
+        "Parmesan cheese",
+        "butter",
+        "garlic"
+      ],
+      "sourceUrl": "https://www.example.com/chicken_alfredo_recipe"
+    },
+    {
+      "title": "Vegetable Stir-Fry",
+      "image": "https://www.example.com/vegetable_stir_fry.jpg",
+      "ingredients": [
+        "broccoli",
+        "carrots",
+        "bell peppers",
+        "onions",
+        "soy sauce",
+        "ginger",
+        "garlic",
+        "sesame oil"
+      ],
+      "sourceUrl": "https://www.example.com/vegetable_stir_fry_recipe"
+    },
+    {
+      "title": "Beef Tacos",
+      "image": "https://www.example.com/beef_tacos.jpg",
+      "ingredients": [
+        "ground beef",
+        "taco seasoning",
+        "tortillas",
+        "lettuce",
+        "tomatoes",
+        "cheddar cheese",
+        "sour cream",
+        "salsa"
+      ],
+      "sourceUrl": "https://www.example.com/beef_tacos_recipe"
+    },
+    {
+      "title": "Mushroom Risotto",
+      "image": "https://www.example.com/mushroom_risotto.jpg",
+      "ingredients": [
+        "Arborio rice",
+        "mushrooms",
+        "chicken or vegetable broth",
+        "white wine",
+        "onion",
+        "Parmesan cheese",
+        "butter"
+      ],
+      "sourceUrl": "https://www.example.com/mushroom_risotto_recipe"
+    },
+    {
+      "title": "Caprese Salad",
+      "image": "https://www.example.com/caprese_salad.jpg",
+      "ingredients": [
+        "tomatoes",
+        "fresh mozzarella cheese",
+        "fresh basil",
+        "balsamic glaze",
+        "olive oil",
+        "salt",
+        "black pepper"
+      ],
+      "sourceUrl": "https://www.example.com/caprese_salad_recipe"
+    },
+    {
+      "title": "Pesto Pasta",
+      "image": "https://www.example.com/pesto_pasta.jpg",
+      "ingredients": [
+        "pasta",
+        "basil pesto",
+        "cherry tomatoes",
+        "Parmesan cheese",
+        "olive oil"
+      ],
+      "sourceUrl": "https://www.example.com/pesto_pasta_recipe"
+    },
+    {
+      "title": "Grilled Salmon",
+      "image": "https://www.example.com/grilled_salmon.jpg",
+      "ingredients": [
+        "salmon fillets",
+        "lemon",
+        "garlic",
+        "olive oil",
+        "salt",
+        "black pepper"
+      ],
+      "sourceUrl": "https://www.example.com/grilled_salmon_recipe"
+    },
+    {
+      "title": "Chicken Caesar Salad",
+      "image": "https://www.example.com/chicken_caesar_salad.jpg",
+      "ingredients": [
+        "romaine lettuce",
+        "chicken breast",
+        "Parmesan cheese",
+        "Caesar dressing",
+        "croutons"
+      ],
+      "sourceUrl": "https://www.example.com/chicken_caesar_salad_recipe"
+    },
+    {
+      "title": "Veggie Pizza",
+      "image": "https://www.example.com/veggie_pizza.jpg",
+      "ingredients": [
+        "pizza dough",
+        "tomato sauce",
+        "mozzarella cheese",
+        "bell peppers",
+        "mushrooms",
+        "red onions",
+        "olive oil"
+      ],
+      "sourceUrl": "https://www.example.com/veggie_pizza_recipe"
+    },
+    {
+      "title": "Classic Cheeseburger",
+      "image": "https://www.example.com/classic_cheeseburger.jpg",
+      "ingredients": [
+        "ground beef",
+        "hamburger buns",
+        "cheddar cheese",
+        "lettuce",
+        "tomato",
+        "onion",
+        "ketchup",
+        "mustard"
+      ],
+      "sourceUrl": "https://www.example.com/classic_cheeseburger_recipe"
+    },
+    {
+      "title": "Pancakes",
+      "image": "https://www.example.com/pancakes.jpg",
+      "ingredients": [
+        "flour",
+        "milk",
+        "eggs",
+        "baking powder",
+        "butter",
+        "maple syrup"
+      ],
+      "sourceUrl": "https://www.example.com/pancakes_recipe"
+    },
+    {
+      "title": "Fruit Smoothie",
+      "image": "https://www.example.com/fruit_smoothie.jpg",
+      "ingredients": [
+        "frozen mixed berries",
+        "banana",
+        "yogurt",
+        "orange juice",
+        "honey"
+      ],
+      "sourceUrl": "https://www.example.com/fruit_smoothie_recipe"
+    },
+    {
+      "title": "Tiramisu",
+      "image": "https://www.example.com/tiramisu.jpg",
+      "ingredients": [
+        "ladyfingers",
+        "espresso",
+        "mascarpone cheese",
+        "eggs",
+        "sugar",
+        "cocoa powder"
+      ],
+      "sourceUrl": "https://www.example.com/tiramisu_recipe"
+    }
+  ]
+  

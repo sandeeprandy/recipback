@@ -32,6 +32,18 @@ db.get("SELECT name FROM sqlite_master WHERE type='table' AND name='users'", (er
   }
 });
 
+app.get("/data" , async (req, res) =>  {
+  const data = await db.all("SELECT * FROM users");
+  res.send(data);
+
+
+})
+app.get('/products', (req, res) => {
+
+  const products = require('./data/products.json');
+  res.json(products);
+});
+
 // Register route
 app.post('/register', async (req, res) => {
   const { email, password, phone } = req.body;
