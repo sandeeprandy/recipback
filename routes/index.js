@@ -1,9 +1,8 @@
-import express from 'express';
-import authRoutes from './authRoutes.js';
+import express from "express";
+import authRoutes from "./authRoutes.js";
 
 const router = express.Router();
 
-console.log('Adding /auth routes...');
-router.use('/auth', authRoutes); // Prefix: /auth
-
+router.use("/auth", authRoutes);
+router.use("/posts", authRoutes);
 export default router;
