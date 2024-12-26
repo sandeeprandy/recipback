@@ -4,40 +4,31 @@ dbInit();
 const addPost = async (req, res) => {
   console.log("addRecord function called with body:", req.body); // Debug log
 
-  const { ilaakaName, pinCode, description, image } = req.body;
+  const { ilaakaName, pinCode, description, image, firstName, lastName } = req.body;
 
   // Validation for required fields
-  if (!ilaakaName || !pinCode || !description || !image) {
-    console.log("Missing fields:", { ilaakaName, pinCode, description, image });
-    return res
-      .status(400)
-      .json({ message: "Please provide all required fields." });
+  if (!ilaakaName || !pinCode || !description || !image || !firstName || !lastName) {
+    console.log("Missing fields:", {
+      ilaakaName,
+      pinCode,
+      description,
+      image,
+      firstName,
+      lastName,
+    });
+    return res.status(400).json({ message: "Please provide all required fields." });
   }
 
   try {
-    const tableName = `s${pinCode}s`; // Format table name as per the requirement
     const db = getDb(); // Get database connection
-
-    // Create table if it doesn't exist
-    const createTableQuery = `
-        CREATE TABLE IF NOT EXISTS ${tableName} (
-          id INT AUTO_INCREMENT PRIMARY KEY,
-          ilaakaName VARCHAR(255) NOT NULL,
-          description TEXT NOT NULL,
-          image TEXT NOT NULL,
-          createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-        )
-      `;
-    await db.query(createTableQuery);
-    console.log(`Table '${tableName}' ensured to exist.`);
 
     // Insert data into the table
     const insertDataQuery = `
-        INSERT INTO ${tableName} (ilaakaName, description, image)
-        VALUES (?, ?, ?)
+        INSERT INTO posts (ilaakaName, pinCode, description, image, first_name, last_name)
+        VALUES (?, ?, ?, ?, ?, ?)
       `;
-    await db.query(insertDataQuery, [ilaakaName, description, image]);
-    console.log("Data inserted successfully into table:", tableName);
+    await db.query(insertDataQuery, [ilaakaName, pinCode, description, image, firstName, lastName]);
+    console.log("Data inserted successfully.");
 
     res.status(201).json({ message: "Data inserted successfully." });
   } catch (err) {
@@ -46,4 +37,37 @@ const addPost = async (req, res) => {
   }
 };
 
-export default { addPost };
+const getPosts = async (req, res) => {
+  console.log("getPosts function called with query:", req.query); // Debug log
+
+  const { ilaakaName, pinCode } = req.query; // Extract query parameters
+
+  try {
+    const db = getDb(); // Get database connection
+
+    // Base query
+    let getPostsQuery = `SELECT * FROM posts`;
+    const queryParams = [];
+
+    // Add conditions if filters are provided
+    if (ilaakaName) {
+      getPostsQuery += ` WHERE ilaakaName = ?`;
+      queryParams.push(ilaakaName);
+    }
+
+    if (pinCode) {
+      getPostsQuery += ilaakaName ? ` AND pinCode = ?` : ` WHERE pinCode = ?`;
+      queryParams.push(pinCode);
+    }
+
+    console.log("Executing query:", getPostsQuery, "with params:", queryParams);
+    const posts = await db.query(getPostsQuery, queryParams);
+
+    res.status(200).json({ posts });
+  } catch (err) {
+    console.error("Error in getPosts:", err.message);
+    res.status(500).json({ message: "Internal server error" });
+  }
+};
+
+export default { addPost, getPosts };
