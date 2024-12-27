@@ -8,6 +8,7 @@ const router = Router();
 router.post("/login", authController.login);
 router.post("/register", authController.register);
 router.post("/addPost", posts.addPost);
+router.get("/getPosts" , posts.getPosts)
 router.get("/feed", users.feed);
 
 export default router;
