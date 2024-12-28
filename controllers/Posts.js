@@ -49,19 +49,24 @@ const getPosts = async (req, res) => {
     let getPostsQuery = `SELECT * FROM posts`;
     const queryParams = [];
 
-    // Add conditions if filters are provided
-    if (ilaakaName) {
+    // Add conditions based on prioritization
+    if (pinCode) {
+      getPostsQuery += ` WHERE pinCode = ?`;
+      queryParams.push(pinCode);
+
+      // Further filter by ilaakaName if provided
+      if (ilaakaName) {
+        getPostsQuery += ` AND ilaakaName = ?`;
+        queryParams.push(ilaakaName);
+      }
+    } else if (ilaakaName) {
+      // If no pinCode, filter by ilaakaName only
       getPostsQuery += ` WHERE ilaakaName = ?`;
       queryParams.push(ilaakaName);
     }
 
-    if (pinCode) {
-      getPostsQuery += ilaakaName ? ` AND pinCode = ?` : ` WHERE pinCode = ?`;
-      queryParams.push(pinCode);
-    }
-
     console.log("Executing query:", getPostsQuery, "with params:", queryParams);
-    const posts = await db.query(getPostsQuery, queryParams);
+    const [posts] = await db.query(getPostsQuery, queryParams); // Ensure correct query execution
 
     res.status(200).json({ posts });
   } catch (err) {
