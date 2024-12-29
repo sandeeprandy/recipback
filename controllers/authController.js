@@ -11,33 +11,61 @@ const login = async (req, res) => {
   try {
     const { email, password } = req.body;
 
-    // Validate user credentials...
+    if (!email || !password) {
+      return res.status(400).json({ message: "Email and password are required." });
+    }
 
     if (!SECRET) {
       throw new Error(
         "JWT_SECRET is not defined in your environment variables."
       );
     }
-    const [user] = await db.query(
-      `SELECT  first_name ,pin_code , created_at, email , phone_number , ilaaka FROM users WHERE email = ?`,
+
+    // Fetch user data from the database
+    const users = await db.query(
+      `SELECT password, first_name, pin_code, created_at, email, phone_number, ilaaka 
+       FROM users 
+       WHERE email = ?`,
       [email]
     );
-
-    console.log(user);
-
-    const token = jwt.sign({ password }, SECRET, { expiresIn: "1h" });
-    if (token) {
-      res.status(200).json({ token, user });
-    }else {
-      res.err("password is incorrect")
+    const usersData = await db.query(
+      `SELECT  first_name, pin_code, created_at, email, phone_number, ilaaka 
+       FROM users 
+       WHERE email = ?`,
+      [email]
+    );
+    // Check if user exists
+    if (!users || users.length === 0) {
+      return res.status(404).json({ message: "User not found." });
     }
 
+    // Retrieve the first user object from the array
+    const user = users[0];
+    console
+    console.log(user.password);
+
+    // Check if the retrieved password is valid
+  
+
+    // Compare the provided password with the stored hashed password
+    const isPasswordValid = await compare(password, user[0].password);
+    if (!isPasswordValid) {
+      return res.status(401).json({ message: "Invalid credentials." });
+    }
+
+    // Generate a token after successful password verification
+    const token = jwt.sign({ email: user.email }, SECRET, { expiresIn: "1h" });
+
+    // Exclude the password field from the response
     
+
+    res.status(200).json({ token, user:  usersData });
   } catch (error) {
     console.error("Error during login:", error.message);
     res.status(500).json({ message: error.message });
   }
 };
+
 
 const register = async (req, res) => {
   // Destructure fields from the request body
