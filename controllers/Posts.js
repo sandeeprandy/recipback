@@ -77,7 +77,7 @@ const addPost = async (req, res) => {
 const getPosts = async (req, res) => {
   console.log("getPosts function called with query:", req.query); // Debug log
 
-  const { ilaakaName, pinCode } = req.query; // Extract query parameters
+  const { ilaakaName, pinCode,filter } = req.query; // Extract query parameters
 
   try {
     const db = getDb(); // Get database connection
@@ -91,10 +91,14 @@ const getPosts = async (req, res) => {
       getPostsQuery += ` WHERE pinCode = ?`;
       queryParams.push(pinCode);
 
+
       // Further filter by ilaakaName if provided
       if (ilaakaName) {
         getPostsQuery += ` AND ilaakaName = ?`;
         queryParams.push(ilaakaName);
+      }else if (filter !== "All") {
+        getPostsQuery+= `AND postType = ?`
+        queryParams.push(filter)
       }
     } else if (ilaakaName) {
       // If no pinCode, filter by ilaakaName only
