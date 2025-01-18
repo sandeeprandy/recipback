@@ -4,10 +4,30 @@ dbInit();
 const addPost = async (req, res) => {
   console.log("addRecord function called with body:", req.body); // Debug log
 
-  const { ilaakaName, pinCode, description, image, firstName, lastName } = req.body;
+  const {
+    ilaakaName,
+    pinCode,
+    description,
+    image,
+    firstName,
+    lastName,
+    postType,
+    price,
+    phoneNumber,
+  } = req.body;
 
   // Validation for required fields
-  if (!ilaakaName || !pinCode || !description || !image || !firstName || !lastName) {
+  if (
+    !ilaakaName ||
+    !pinCode ||
+    !description ||
+    !image ||
+    !firstName ||
+    !lastName ||
+    !postType ||
+    !price ||
+    !phoneNumber
+  ) {
     console.log("Missing fields:", {
       ilaakaName,
       pinCode,
@@ -15,8 +35,13 @@ const addPost = async (req, res) => {
       image,
       firstName,
       lastName,
+      postType,
+      price,
+      phoneNumber,
     });
-    return res.status(400).json({ message: "Please provide all required fields." });
+    return res
+      .status(400)
+      .json({ message: "Please provide all required fields." });
   }
 
   try {
@@ -24,10 +49,22 @@ const addPost = async (req, res) => {
 
     // Insert data into the table
     const insertDataQuery = `
-        INSERT INTO posts (ilaakaName, pinCode, description, image, first_name, last_name)
-        VALUES (?, ?, ?, ?, ?, ?)
+        INSERT INTO posts (ilaakaName, pinCode, description, image, first_name, last_name, postType, price, phoneNumber)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
       `;
-    await db.query(insertDataQuery, [ilaakaName, pinCode, description, image, firstName, lastName]);
+
+    await db.query(insertDataQuery, [
+      ilaakaName,
+      pinCode,
+      description,
+      image,
+      firstName,
+      lastName,
+      postType, // Added postType
+      price, // Added price
+      phoneNumber, // Added phoneNumber
+    ]);
+
     console.log("Data inserted successfully.");
 
     res.status(201).json({ message: "Data inserted successfully." });
