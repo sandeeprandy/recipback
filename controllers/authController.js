@@ -23,7 +23,7 @@ const login = async (req, res) => {
 
     // Fetch user data from the database
     const users = await db.query(
-      `SELECT password, first_name, pin_code, created_at, email, phone_number, ilaaka 
+      `SELECT password, first_name, pin_code, created_at, email, phone_number ,last_name, ilaaka 
        FROM users 
        WHERE email = ?`,
       [email]
