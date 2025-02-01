@@ -1,5 +1,5 @@
-import mysql from 'mysql2/promise';
-import dotenv from 'dotenv';
+import mysql from "mysql2/promise";
+import dotenv from "dotenv";
 
 // Load environment variables from the .env file
 dotenv.config();
@@ -9,7 +9,7 @@ let db = null;
 export const dbInit = async () => {
   try {
     if (db) {
-      console.log('Database connection already initialized.');
+      console.log("Database connection already initialized.");
       return db;
     }
 
@@ -20,13 +20,13 @@ export const dbInit = async () => {
       user: process.env.DB_USER,
       password: process.env.DB_PASSWORD,
       database: process.env.DB_NAME,
-      ssl: process.env.DB_SSL === 'true' ? { rejectUnauthorized: false } : undefined,
-      waitForConnections: true,
-      connectionLimit: 10,  // Prevents too many open connections
-      queueLimit: 0,
+      ssl:
+        process.env.DB_SSL === "true"
+          ? { rejectUnauthorized: false }
+          : undefined,
     });
 
-    console.log('Connected to MySQL database.');
+    console.log("Connected to MySQL database.");
 
     // Ensure `users` table exists
     const [result] = await db.query("SHOW TABLES LIKE 'users'");
@@ -39,19 +39,21 @@ export const dbInit = async () => {
           phone VARCHAR(20) NOT NULL
         );
       `);
-      console.log('Users table created successfully.');
+      console.log("Users table created successfully.");
     }
 
     return db;
   } catch (err) {
-    console.error('Database connection error:', err.message);
+    console.error("Database connection error:", err.message);
     process.exit(1); // Exit the process if DB initialization fails
   }
 };
 
 export const getDb = () => {
   if (!db) {
-    throw new Error('Database connection is not initialized. Call dbInit() first.');
+    throw new Error(
+      "Database connection is not initialized. Call dbInit() first."
+    );
   }
   return db;
 };
