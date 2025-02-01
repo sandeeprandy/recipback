@@ -23,7 +23,7 @@ app.get('/rr', (req, res) => {
 });
 app.use((req, res, next) => {
   console.error(`404 Not Found: ${req.method} ${req.originalUrl}`);
-  res.status(404).json({ message: 'Route notsss found' });
+  res.status(404).json({ message: 'Route not found' });
 });
 
 const PORT = process.env.PORT || 5000;
