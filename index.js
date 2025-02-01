@@ -19,7 +19,7 @@ console.log('Registering routes...');
 app.use('/api', routes); // Make sure this matches your expected endpoint
 
 app.get('/', (req, res) => {
-  res.send('API is working   vercel!');
+  res.send('API is working now   vercel!');
 });
 app.use((req, res, next) => {
   console.error(`404 Not Found: ${req.method} ${req.originalUrl}`);
