@@ -21,6 +21,9 @@ export const dbInit = async () => {
       password: process.env.DB_PASSWORD,
       database: process.env.DB_NAME,
       ssl: process.env.DB_SSL === 'true' ? { rejectUnauthorized: false } : undefined,
+      waitForConnections: true,
+      connectionLimit: 10,  // Prevents too many open connections
+      queueLimit: 0,
     });
 
     console.log('Connected to MySQL database.');
