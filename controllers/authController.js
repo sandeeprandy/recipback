@@ -29,7 +29,7 @@ const login = async (req, res) => {
       [email]
     );
     const usersData = await db.query(
-      `SELECT  first_name, pin_code, created_at, email, phone_number, ilaaka ,last_name
+      `SELECT id,first_name, pin_code, created_at, email, phone_number, ilaaka ,last_name
        FROM users 
        WHERE email = ?`,
       [email]
